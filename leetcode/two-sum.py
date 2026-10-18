@@ -1,14 +1,19 @@
-class Solution(object):
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        hashmap = {}
-        for i in range(len(nums)):
-            x = target - nums[i]
-            if x in hashmap:
-                return [i, hashmap[x]]
-            hashmap[nums[i]] = i
-        return []
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    const map = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        map.set(nums[i], i);
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        if (map.has(complement) && map.get(complement) !== i) {
+            return [i, map.get(complement)];
+        }
+    }
+    return [];
+};
