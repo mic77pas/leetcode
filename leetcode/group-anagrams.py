@@ -1,16 +1,15 @@
-class Solution(object):
-    def groupAnagrams(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: List[List[str]]
-        """
-        hashmap = {}
-
-        for s in strs:
-            key = ''.join(sorted(s))
-            if key in hashmap:
-                hashmap[key].append(s)
-            else:
-                hashmap[key] = [s]
-
-        return hashmap.values()
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {
+    let ans = {};
+    for (let s of strs) {
+        let key = s.split('').sort().join('');
+        if (!ans[key]) {
+            ans[key] = [];
+        }
+        ans[key].push(s);
+    }
+    return Object.values(ans); 
+};
