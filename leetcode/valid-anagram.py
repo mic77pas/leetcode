@@ -1,19 +1,25 @@
-class Solution(object):
-    def isAnagram(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: bool
-        """
-        if len(s) != len(t):
-            return False
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+    if (s.length != t.length) return false;
+    const counter = new Map();
+    for (let char of s) {
+        counter.set(char, (counter.get(char) || 0) + 1);
+    }
 
-        hashmap1 = {}
-        hashmap2 = {}
-        
-        for ch in s:
-            hashmap1[ch] = hashmap1.get(ch, 0) + 1
-        for ch in t:
-            hashmap2[ch] = hashmap2.get(ch, 0) + 1
+    for (let char of t) {
+        if (!counter.has(char) || counter.get(char) == 0) {
+            return false;
+        }
+        counter.set(char, counter.get(char) - 1);    
+    }
+    return true;
 
-        return hashmap1 == hashmap2
+    // const sortedS = s.split('').sort().join('');
+    // const sortedT = t.split('').sort().join('');
+    // if (sortedS === sortedT) return true;
+    // return false;
+};
